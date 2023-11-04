@@ -1,8 +1,12 @@
-# React + Vite
+# [FullStackOpen Part 7](https://fullstackopen.com/en/part7)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 7.1: routed anecdotes, step1
+Add React Router to the application so that by clicking links in the Menu component the view can be changed.
 
-Currently, two official plugins are available:
+At the root of the application, meaning the path /, show the list of anecdotes:
+![root app](https://fullstackopen.com/static/57c61f000e5eddce42c3a345c2819b77/5a190/40.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The Footer component should always be visible at the bottom.
+
+The creation of a new anecdote should happen e.g. in the path create:
+![footer](https://fullstackopen.com/static/c393db40b64e8eadd1220bdfccc8eede/5a190/41.png)
