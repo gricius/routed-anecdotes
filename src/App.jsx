@@ -4,7 +4,8 @@ import {
   Routes,
   Route,
   Link,
-  useParams
+  useParams,
+  useNavigate
 } from 'react-router-dom'
 
 const AnecdoteList = ({ anecdotes }) => (
@@ -39,7 +40,7 @@ const About = () => (
     <em>An anecdote is a brief, revealing account of an individual person or an incident.
       Occasionally humorous, anecdotes differ from jokes because their primary purpose is not simply to provoke laughter but to reveal a truth more general than the brief tale itself,
       such as to characterize a person by delineating a specific quirk or trait, to communicate an abstract idea about a person, place, or thing through the concrete details of a short narrative.
-      An anecdote is "a story with a point."</em>
+      An anecdote is a story with a point.</em>
 
     <p>Software engineering is full of excellent anecdotes, at this app you can find the best and add more.</p>
   </div>
@@ -54,6 +55,7 @@ const Footer = () => (
 )
 
 const CreateNew = (props) => {
+  const navigate = useNavigate();
   const [content, setContent] = useState('')
   const [author, setAuthor] = useState('')
   const [info, setInfo] = useState('')
@@ -67,6 +69,14 @@ const CreateNew = (props) => {
       info,
       votes: 0
     })
+    setContent('')
+    setAuthor('')
+    setInfo('')
+    navigate('/', { replace: true });
+    props.setNotification(`A new anecdote ${content} created!`);
+    setTimeout(() => {
+      props.setNotification(null);
+    }, 5000);
   }
 
   return (
@@ -135,6 +145,13 @@ const App = () => {
     padding: 5
   }
 
+  const notificationStyle = {
+    border: '2px solid red',
+    padding: '10px',
+    margin: '10px 0px',
+    borderRadius: '5px'
+  }
+
   return (
     <div>
       <h1>Software anecdotes</h1>
@@ -143,10 +160,11 @@ const App = () => {
         <Link style={padding} to='/create'>create new</Link>
         <Link style={padding} to='/about'>about</Link>
       </div>
+      {notification && <div style={notificationStyle}>{notification}</div>}
       <Routes>
         <Route path="/anecdotes/:id" element={<Anecdote anecdotes={anecdotes} />} />
         <Route path='/' element={<AnecdoteList anecdotes={anecdotes} />} />
-        <Route path='/create' element={<CreateNew addNew={addNew} />} />
+        <Route path='/create' element={<CreateNew addNew={addNew} setNotification={setNotification} />} />
         <Route path='/about' element={<About />} />
       </Routes>
       <Footer />
