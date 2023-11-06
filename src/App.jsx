@@ -69,9 +69,9 @@ const CreateNew = (props) => {
       info: info.value,
       votes: 0
     })
-    content.value = ''
-    author.value = ''
-    info.value = ''
+    content.reset()
+    author.reset()
+    info.reset()
     navigate('/', { replace: true });
     props.setNotification(`A new anecdote ${content.value} created!`);
     setTimeout(() => {
@@ -96,6 +96,11 @@ const CreateNew = (props) => {
           <input name='info' {...info} />
         </div>
         <button>create</button>
+        <button type="button" onClick={() => {
+          content.reset();
+          author.reset();
+          info.reset();
+        }}>reset</button>
       </form>
     </div>
   )
