@@ -8,15 +8,16 @@ export const useField = (type) => {
     setValue(event.target.value)
   }
 
-  // clear the value of the input field
   const reset = () => {
     setValue('')
   }
 
   return {
-    type,
-    value,
-    onChange,
-    reset
+    reset,
+    input:{
+      type,
+      value,
+      onChange
+    }
   }
 }

@@ -85,3 +85,40 @@ Depending on your solution, you may see the following warning in your console:
 ![warning](https://fullstackopen.com/static/c4f6d266117f4d881d1df60a4ca3b9f5/5a190/62ea.png)
 
 We will return to this warning in the next exercise.
+
+# 7.6: anecdotes and hooks step3
+If your solution did not cause a warning to appear in the console, you have already finished this exercise.
+
+If you see the warning in the console, make the necessary changes to get rid of the Invalid value for prop `reset` on <input> tag console warning.
+
+The reason for this warning is that after making the changes to your application, the following expression:
+
+```jsx
+<input {...content}/>
+```
+
+Essentially, is the same as this:
+
+```jsx
+<input
+  value={content.value} 
+  type={content.type}
+  onChange={content.onChange}
+
+  reset={content.reset}
+/>
+```
+
+The input element should not be given a reset attribute.
+
+One simple fix would be to not use the spread syntax and write all of the forms like this:
+
+```jsx
+<input
+  value={username.value} 
+  type={username.type}
+  onChange={username.onChange}
+/>
+```
+
+If we were to do this, we would lose much of the benefit provided by the useField hook. Instead, come up with a solution that fixes the issue, but is still easy to use with spread syntax.
